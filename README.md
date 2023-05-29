@@ -1,4 +1,4 @@
-#Android fuse drivers for exFAT and NTFS
+# Android fuse drivers for exFAT and NTFS
 
 **DISCLAIMER:** The source code was taken from open source projects, and only altered for Android compatibility. Expect the same bugs and misbehavior found in the original versions! **No warranty and no support at all: use it at your own risk and responsibility!**
 
@@ -31,7 +31,23 @@ The `/system/etc/install-recovery-2.sh` script can be executed manually, from a 
 
 Of course, I've checked all above, and it works just fine on my particular device, though it does not mean it will work for you!
 
-##How to build
+## How to use multi-tools
+
+If you install/copy binaries as such, to some location where you can set POSIX executable bits (e.g. to `/data/android-fs` which you would create for the purpose if the `/system/xbin` is not writeable or persistent), you would have to add symlinks for other jobs these tools can perform, e.g. per https://forum.xda-developers.com/t/exfat-and-ntfs-fuse-drivers-easy-build-for-any-platform.3126413/post-65639156:
+
+````
+cd /data/android-fs
+
+ln -s mount.exfat mount.exfat-fuse
+ln -s mount.exfat dumpexfat
+ln -s mount.exfat exfatfsck
+ln -s mount.exfat exfatlabel
+ln -s mount.exfat mkexfatfs
+ln -s mount.exfat fsck.exfat
+ln -s mount.exfat mkfs.exfat
+````
+
+## How to build
 Build process of this project is rather straightforward:
 
 1. Install Android NDK for your platform (I use Windows 7 64-bit/Cygwin, NDK r10b).
@@ -40,8 +56,8 @@ Build process of this project is rather straightforward:
 
 I tried to build for `mips` as well and faced a compile error for `mips64`. It can be worked around with easy, but I never net a `mips`-based Andriod device, so I don't bother.
 
-##Notes on exFAT driver build
+## Notes on exFAT driver build
 Please read [here](https://github.com/Lurker00/Android-fs/blob/master/jni/external/exfat/README.md).
 
-##Notes on NTFS driver build
+## Notes on NTFS driver build
 Please read [here](https://github.com/Lurker00/Android-fs/blob/master/jni/ntfs-3g/README.md)
